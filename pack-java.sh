@@ -38,7 +38,7 @@ wait
 pe "pack set-default-builder gcr.io/paketo-buildpacks/builder:base"
 wait
 
-echo "# Alternatively: 'pack build <image-name> --builder <builder> ...'"
+echo "# alternatively: 'pack build <image-name> --builder <builder> ...'"
 wait
 
 p "# building the app"
@@ -56,11 +56,12 @@ pe "docker ps | grep my-java-app"
 DOCKER_CONTAINER=$(docker ps | grep my-java-app | cut -d ' ' -f1)
 pe "docker stop ${DOCKER_CONTAINER}"
 
-p "# Let's edit the app slightly"
+p "# let's edit the app slightly"
 cmd
 
 p "# build it again (rebuild)"
 pe "pack build my-java-app --path apps/java-maven"
+wait
 
 p "# run it again"
 pe "docker run -d -p 8080:8080 my-java-app"
